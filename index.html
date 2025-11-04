@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Hi, I'm Kumar — Developer & DevOps Learner</h1>
+      <p class="tagline">I build simple web apps and learn DevOps to deliver them reliably.</p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2>About me</h2>
+      <p>I enjoy building small applications and automating their delivery. This portfolio is intentionally tiny so it is easy to containerize and deploy as a learning exercise in DevOps.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="card">
+          <h3>Portfolio Site</h3>
+          <p>Static HTML/CSS site with CI/CD to GitHub Pages and a Docker image for local testing.</p>
+        </article>
+        <article class="card">
+          <h3>Project Template</h3>
+          <p>Small template showing how to add a pipeline, containerize and deploy static content.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>If you'd like to reach me, use the form below (this is a demo form that triggers a JS alert).</p>
+      <form id="contactForm">
+        <label>Name <input name="name" required></label>
+        <label>Email <input name="email" type="email" required></label>
+        <label>Message <textarea name="message" required></textarea></label>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Built with ❤️ • Learn DevOps</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

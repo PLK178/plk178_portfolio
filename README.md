@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 docker run --rm -p 8080:80 my-portfolio:local
 # Simple Portfolio + DevOps Learning Kit
 
@@ -146,3 +147,6 @@ If you want, I'll now (choose one):
 - D) Create a step-by-step lab in a new `LABS.md` with answers and expected outputs
 
 Tell me which you prefer and I will continue.
+=======
+this is my portfolio i have recreate in fsd lab test
+>>>>>>> 980c8e4547534827c3751c20d113f7163cd2ce9b

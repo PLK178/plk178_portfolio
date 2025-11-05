@@ -1,6 +1,22 @@
-# Simple Dockerfile to serve static site via nginx
+# Dockerfile optimized for layer caching
 FROM nginx:alpine
-COPY . /usr/share/nginx/html
-# nginx exposes 80 by default
+
+LABEL maintainer="Kumar"
+
+# Set working directory to nginx html directory
+WORKDIR /usr/share/nginx/html
+
+# Copy individual files so Docker can cache unchanged layers.
+# When you change only one file, only that layer is rebuilt.
+COPY index.html ./
+COPY styles.css ./
+COPY script.js ./
+COPY assets/ ./assets/
+
+# Ensure permissions (optional)
+RUN chmod -R 755 /usr/share/nginx/html || true
+
 EXPOSE 80
-# Use default nginx CMD
+
+# Start nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]

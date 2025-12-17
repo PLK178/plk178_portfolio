@@ -1,60 +1,1056 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <title>Prodduturu Likith Kumar | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #050509;
+            --bg-alt: #101018;
+            --card: #151525;
+            --accent: #6366f1;
+            --accent-soft: rgba(99, 102, 241, 0.15);
+            --text: #f9fafb;
+            --muted: #9ca3af;
+            --border: #27272f;
+            --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #111827 0, #020617 55%, #020617 100%);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Layout */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom,
+                    rgba(2, 6, 23, 0.95),
+                    rgba(2, 6, 23, 0.8),
+                    transparent);
+            border-bottom: 1px solid rgba(31, 41, 55, 0.7);
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 0;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #e5e7eb, #6366f1);
+            box-shadow: 0 0 16px rgba(129, 140, 248, 0.9);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            padding: 0.2rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.25rem;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(to right, #6366f1, #a855f7);
+            transition: width 0.18s ease-out;
+        }
+
+        .nav-links a:hover {
+            color: #e5e7eb;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                padding: 0.35rem 0.9rem;
+                border-radius: var(--radius-sm);
+                background: linear-gradient(135deg, #6366f1, #a855f7);
+                font-size: 0.8rem;
+                border: none;
+                cursor: pointer;
+                color: #f9fafb;
+                box-shadow: 0 0 18px rgba(129, 140, 248, 0.4);
+            }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 3.5rem 0 2.5rem;
+        }
+
+        @media (min-width: 900px) {
+            .hero {
+                padding-top: 4.5rem;
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 899px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.2rem 0.7rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: var(--muted);
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+        }
+
+        .hero-title {
+            font-size: clamp(2.1rem, 3.2vw, 2.7rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, #e5e7eb, #a5b4fc);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.02rem;
+            color: var(--muted);
+            max-width: 32rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .badge {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: #d1d5db;
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 0.65rem 1.2rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border: none;
+            color: #f9fafb;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary {
+            padding: 0.6rem 1.05rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.85);
+            color: #e5e7eb;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero-socials {
+            display: flex;
+            gap: 0.7rem;
+            margin-left: 0.5rem;
+        }
+
+        .hero-socials a {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .hero-card {
+            border-radius: var(--radius-lg);
+            background: radial-gradient(circle at top left,
+                    rgba(79, 70, 229, 0.12),
+                    rgba(15, 23, 42, 0.98));
+            border: 1px solid rgba(55, 65, 81, 0.7);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero-pill {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: #e5e7eb;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .stat {
+            padding: 0.6rem 0.7rem;
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            padding: 2.3rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #e5e7eb;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            max-width: 22rem;
+        }
+
+        .section-body {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        /* About */
+        .about-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            padding: 1.2rem 1.3rem;
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+            color: #d1d5db;
+        }
+
+        .about-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            padding: 0.9rem 1rem;
+        }
+
+        .skill-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #e5e7eb;
+        }
+
+        .skill-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .chip {
+            font-size: 0.76rem;
+            padding: 0.18rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            color: #d1d5db;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.1rem;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.96);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(31, 41, 55, 0.95);
+            padding: 1rem 1rem 0.95rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
+                border-color 0.15s ease-out, background 0.15s ease-out;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.12), transparent);
+            opacity: 0;
+            transition: opacity 0.18s ease-out;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: rgba(129, 140, 248, 0.9);
+            background: radial-gradient(circle at top left,
+                    rgba(15, 23, 42, 0.9),
+                    rgba(2, 6, 23, 0.98));
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-desc {
+            font-size: 0.84rem;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .project-tech span {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            color: #d1d5db;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .project-link {
+            font-size: 0.78rem;
+            color: #a5b4fc;
+        }
+
+        /* Experience & Education */
+        .timeline {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .timeline-item {
+            padding: 0.9rem 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+        }
+
+        .timeline-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-body {
+            font-size: 0.83rem;
+            color: #d1d5db;
+        }
+
+        .timeline-body ul {
+            margin-top: 0.35rem;
+            padding-left: 1.1rem;
+        }
+
+        .timeline-body li {
+            margin-bottom: 0.2rem;
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-card {
+            padding: 0.9rem 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.94);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            font-size: 0.85rem;
+            color: #d1d5db;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-meta {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+            gap: 1.3rem;
+        }
+
+        @media (max-width: 799px) {
+            .contact-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .contact-card {
+            padding: 1rem 1.1rem;
+            border-radius: var(--radius-lg);
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            font-size: 0.87rem;
+        }
+
+        .contact-list {
+            margin-top: 0.75rem;
+            display: grid;
+            gap: 0.4rem;
+            font-size: 0.83rem;
+        }
+
+        .contact-list span {
+            color: var(--muted);
+        }
+
+        .contact-link {
+            color: #a5b4fc;
+            font-size: 0.84rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .field {
+            display: grid;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .field label {
+            color: var(--muted);
+        }
+
+        .field input,
+        .field textarea {
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(31, 41, 55, 0.95);
+            border-radius: 10px;
+            padding: 0.45rem 0.6rem;
+            color: #e5e7eb;
+            font-size: 0.85rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 38px;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: rgba(129, 140, 248, 0.9);
+            box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5);
+        }
+
+        .contact-submit {
+            padding: 0.55rem 1.1rem;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #f9fafb;
+            font-size: 0.85rem;
+            cursor: pointer;
+            justify-self: flex-start;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 1.4rem 0 1.8rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Hi, I'm Kumar — Developer & DevOps Learner</h1>
-      <p class="tagline">I build simple web apps and learn DevOps to deliver them reliably.</p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <div class="page">
+        <header class="navbar">
+            <div class="container navbar-inner">
+                <div class="nav-brand">
+                    <div class="nav-dot"></div>
+                    <span>LIKITH · PORTFOLIO</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#achievements">Achievements</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <a href="https://github.com/plk456" target="_blank" class="nav-cta">
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero -->
+            <section class="hero" id="top">
+                <div class="container hero-grid">
+                    <div>
+                        <div class="hero-chip">
+                            <div class="hero-chip-dot"></div>
+                            <span>AI &amp; ML Student · Builder</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Hi, I'm <span>Prodduturu Likith Kumar</span>
+                        </h1>
+                        <p class="hero-sub">
+                            Self-taught Machine Learning &amp; IoT enthusiast, currently pursuing AI &amp; ML at
+                            Madanapalle Institute of Technology and Science. I enjoy turning ideas into end-to-end
+                            projects spanning ML, automation and web.
+                        </p>
+                        <div class="hero-badges">
+                            <span class="badge">Machine Learning</span>
+                            <span class="badge">IoT &amp; Automation</span>
+                            <span class="badge">Self-learner</span>
+                        </div>
+                        <div class="hero-actions">
+                            <a href="#projects">
+                                <button class="btn-primary">View Projects</button>
+                            </a>
+                            <div class="hero-socials">
+                                <a href="mailto:Kumarlikith178@gmail.com" title="Email">✉️</a>
+                                <a href="https://github.com/plk456" target="_blank" title="GitHub">GH</a>
+                                <a href="https://www.linkedin.com/in/likithkumar456/" target="_blank"
+                                    title="LinkedIn">in</a>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="hero-card">
+                        <div class="hero-card-header">
+                            <span class="hero-pill">AI &amp; ML · Student</span>
+                            <span class="hero-pill">Open Source</span>
+                        </div>
+                        <p style="font-size: 0.86rem; color:#e5e7eb;">
+                            Passionate about learning new technologies, experimenting with ML models, and building
+                            systems that solve real-world problems in health and security.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <div class="stat-label">Core Focus</div>
+                                <div class="stat-value">AI, ML &amp; </div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">Education</div>
+                                <div class="stat-value">AI &amp; ML @ MITS</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">GitHub</div>
+                                <div class="stat-value">/plk456</div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section id="about">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">About</h2>
+                        <p class="section-subtitle">
+                            A quick overview of who you are, what you are learning, and what kinds of problems you enjoy
+                            solving.
+                        </p>
+                    </div>
+                    <div class="section-body">
+                        <div class="about-card">
+                            <p>
+                                I am an AI &amp; ML student with a strong interest in building practical solutions using
+                                machine learning, deep learning, IoT, and automation. I enjoy exploring new tools,
+                                experimenting with models, and deploying projects that can help people in healthcare,
+                                security, and everyday automation.
+                            </p>
+                            <p style="margin-top:0.5rem;">
+                                Most of my work combines Python-based ML stacks with simple web frontends and embedded
+                                systems, allowing me to go from data and sensors all the way to interactive applications
+                                and dashboards.
+                            </p>
+                            <div class="about-meta">
+                                <span>📍 India</span>
+                                <span>🎓 AI &amp; ML @ MITS</span>
+                                <span>💻 Open-source projects on GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section id="skills">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Skills</h2>
+                        <p class="section-subtitle">
+                            Technologies and tools used across machine learning, web, and embedded systems.
+                        </p>
+                    </div>
+                    <div class="section-body skills-grid">
+                        <div class="skill-card">
+                            <h3 class="skill-title">Programming</h3>
+                            <div class="skill-chips">
+                                <span class="chip">Python</span>
+                                <span class="chip">JavaScript</span>
+                                <span class="chip">C</span>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h3 class="skill-title">Frontend</h3>
+                            <div class="skill-chips">
+                                <span class="chip">HTML</span>
+                                <span class="chip">CSS</span>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h3 class="skill-title">AI &amp; ML</h3>
+                            <div class="skill-chips">
+                                <span class="chip">Scikit-learn</span>
+                                <span class="chip">TensorFlow</span>
+                                <span class="chip">YOLO</span>
+                                <span class="chip">LangChain</span>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h3 class="skill-title">Tools</h3>
+                            <div class="skill-chips">
+                                <span class="chip">Git</span>
+                                <span class="chip">Docker</span>
+                                <span class="chip">Selenium</span>
+                                <span class="chip">N8N</span>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <h3 class="skill-title">Other</h3>
+                            <div class="skill-chips">
+                                <span class="chip">Kali Linux basics</span>
+                                <span class="chip">Social Engineering</span>
+                                <span class="chip">Wireshark</span>
+                                <span class="chip">Metasploit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Projects</h2>
+                        <p class="section-subtitle">
+                            Selected work across machine learning, health monitoring, and security systems.
+                        </p>
+                    </div>
+                    <div class="section-body projects-grid">
+                        <!-- Project 1 -->
+                        <article class="project-card">
+                            <h3 class="project-title">ML Based Heart Stroke Prediction</h3>
+                            <p class="project-desc">
+                                A machine learning pipeline that predicts the likelihood of a patient experiencing a
+                                heart stroke using structured health report data.
+                            </p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Scikit-learn</span>
+                                <span>Pandas</span>
+                                <span>Numpy</span>
+                                <span>Matplotlib</span>
+                                <span>Streamlit</span>
+                            </div>
+                            <div class="project-footer">
+                                <span>End-to-end ML application</span>
+                                <a class="project-link" href="https://github.com/plk456/heart-stroke-prediction"
+                                    target="_blank">View on GitHub →</a>
+                            </div>
+                        </article>
+
+                        <!-- Project 2 -->
+                        <article class="project-card">
+                            <h3 class="project-title">AI Powered Health Monitoring System</h3>
+                            <p class="project-desc">
+                                Early disease detection system targeting stenosis-related heart disease and mouth
+                                cancer, designed to assist cardiologists and ENT doctors.
+                            </p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>TensorFlow</span>
+                                <span>Scikit-learn</span>
+                                <span>YOLO</span>
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>LangChain</span>
+                            </div>
+                            <div class="project-footer">
+                                <span>Health analytics &amp; AI</span>
+                                <a class="project-link" href="https://github.com/plk456/Early-Disease-Detection-System"
+                                    target="_blank">View on GitHub →</a>
+                            </div>
+                        </article>
+
+                        <!-- Project 3 -->
+                        <article class="project-card">
+                            <h3 class="project-title">Security Alert Alarm System</h3>
+                            <p class="project-desc">
+                                A hardware-based security alert system designed for theft protection, integrating
+                                sensors and alarms for real-time notification.
+                            </p>
+                            <div class="project-tech">
+                                <span>Arduino</span>
+                                <span>Embedded C</span>
+                            </div>
+                            <div class="project-footer">
+                                <span>Embedded &amp; IoT</span>
+                                <span class="project-link">GitHub link coming soon</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience & Education -->
+            <section id="experience">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Experience &amp; Education</h2>
+                        <p class="section-subtitle">
+                            Academic background and practical work that shaped your current skill set.
+                        </p>
+                    </div>
+                    <div class="section-body timeline">
+                        <div class="timeline-item">
+                            <h3 class="timeline-title">AI &amp; ML Student</h3>
+                            <div class="timeline-meta">
+                                Madanapalle Institute of Technology and Science · GPA: 7.3 / 10.0
+                            </div>
+                            <div class="timeline-body">
+                                <p>
+                                    Studying core concepts of artificial intelligence and machine learning while
+                                    applying them to hands-on projects in healthcare, automation, and security.
+                                </p>
+                                <ul>
+                                    <li>Built ML models for health monitoring and early disease detection.</li>
+                                    <li>Explored deep learning frameworks and computer vision tools.</li>
+                                    <li>Worked on IoT and automation-based prototypes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="timeline-title">Loyola Polytechnic YSSR</h3>
+                            <div class="timeline-meta">
+                                Percentage: 83 / 100
+                            </div>
+                            <div class="timeline-body">
+                                <p>
+                                    Developed a strong foundation in core engineering concepts and problem solving,
+                                    which helped in transitioning into AI and ML domains.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="timeline-title">Open Source &amp; Personal Projects</h3>
+                            <div class="timeline-meta">
+                                GitHub · github.com/plk456
+                            </div>
+                            <div class="timeline-body">
+                                <p>
+                                    Actively contributing projects to GitHub, focusing on practical ML pipelines, web
+                                    integrations, and automation scripts.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements -->
+            <section id="achievements">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Achievements</h2>
+                        <p class="section-subtitle">
+                            Highlights that reflect your initiative and performance in competitive settings.
+                        </p>
+                    </div>
+                    <div class="section-body achievements-grid">
+                        <article class="achievement-card">
+                            <h3 class="achievement-title">AI/ML Hackathon</h3>
+                            <div class="achievement-meta">Top 14 out of 65 teams · Solo participant</div>
+                            <p>
+                                Secured 14th place as an individual participant in an AI/ML hackathon, showcasing strong
+                                problem-solving, implementation, and self-learning abilities under time constraints.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Contact</h2>
+                        <p class="section-subtitle">
+                            Open to internships, collaborations, and interesting project ideas in AI, ML, IoT, and
+                            automation.
+                        </p>
+                    </div>
+                    <div class="section-body contact-grid">
+                        <div class="contact-card">
+                            <p>
+                                If you’d like to discuss a project, potential collaboration, or internship opportunity,
+                                feel free to reach out. The easiest way to contact me is via email or LinkedIn.
+                            </p>
+                            <div class="contact-list">
+                                <div>
+                                    <span>Email:&nbsp;</span>
+                                    <a class="contact-link"
+                                        href="mailto:Kumarlikith178@gmail.com">Kumarlikith178@gmail.com</a>
+                                </div>
+                                <div>
+                                    <span>GitHub:&nbsp;</span>
+                                    <a class="contact-link" href="https://github.com/plk456"
+                                        target="_blank">github.com/plk456</a>
+                                </div>
+                                <div>
+                                    <span>LinkedIn:&nbsp;</span>
+                                    <a class="contact-link" href="https://www.linkedin.com/in/likithkumar456/"
+                                        target="_blank">linkedin.com/in/likithkumar456</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <form class="contact-form"
+                                onsubmit="event.preventDefault(); alert('Thanks for reaching out!');">
+                                <div class="field">
+                                    <label for="name">Name</label>
+                                    <input id="name" type="text" placeholder="Your name" />
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" placeholder="you@example.com" />
+                                </div>
+                                <div class="field">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" rows="4" placeholder="How can we work together?"></textarea>
+                                </div>
+                                <button type="submit" class="contact-submit">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            © <span id="year"></span> Prodduturu Likith Kumar. Built with ❤️ and curiosity.
+        </footer>
     </div>
-  </header>
 
-  <main class="container">
-    <section id="about">
-      <h2>About me</h2>
-      <p>I enjoy building small applications and automating their delivery. This portfolio is intentionally tiny so it is easy to containerize and deploy as a learning exercise in DevOps.</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <article class="card">
-          <h3>Portfolio Site</h3>
-          <p>Static HTML/CSS site with CI/CD to GitHub Pages and a Docker image for local testing.</p>
-        </article>
-        <article class="card">
-          <h3>Project Template</h3>
-          <p>Small template showing how to add a pipeline, containerize and deploy static content.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>If you'd like to reach me, use the form below (this is a demo form that triggers a JS alert).</p>
-      <form id="contactForm">
-        <label>Name <input name="name" required="required" /></label>
-        <label>Email <input name="email" type="email" required="required" /></label>
-        <label>Message <textarea name="message" required="required"></textarea></label>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">Built with ❤️ • Learn DevOps</div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
+
 </html>

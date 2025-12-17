@@ -1,22 +1,11 @@
-# Dockerfile optimized for layer caching
+# Use a lightweight Nginx image
 FROM nginx:alpine
 
-LABEL maintainer="Kumar"
+# Copy the static website files to the Nginx document root
+COPY . /usr/share/nginx/html
 
-# Set working directory to nginx html directory
-WORKDIR /usr/share/nginx/html
-
-# Copy individual files so Docker can cache unchanged layers.
-# When you change only one file, only that layer is rebuilt.
-COPY index.html ./
-COPY styles.css ./
-COPY script.js ./
-COPY assets/ ./assets/
-
-# Ensure permissions (optional)
-RUN chmod -R 755 /usr/share/nginx/html || true
-
+# Expose port 80
 EXPOSE 80
 
-# Start nginx in foreground
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

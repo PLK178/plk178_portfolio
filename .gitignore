@@ -1,7 +1,0 @@
-# Ignore typical files
-node_modules/
-.env
-.DS_Store
-.vscode/
-__pycache__/
-*.log
